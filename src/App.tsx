@@ -14,7 +14,6 @@ const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [response, setResponse] = useState<string | null>(null);
 
-  // Create a new thread and immediately show it.
   const createNewThread = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();
     const newCount = threadCount + 1;
@@ -30,13 +29,11 @@ const HomePage: React.FC = () => {
     setActiveThread(newThread);
   };
 
-  // Display an existing thread.
   const showThread = (thread: Thread, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();
     setActiveThread(thread);
   };
 
-  // Handle search submission and connect with your FastAPI backend.
   const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Searching for:", searchQuery);
@@ -81,14 +78,14 @@ const HomePage: React.FC = () => {
       <div className="side-nav">
         <ul id="thread-list">
           <li>
-            <a href="/#" className="new-thread" onClick={createNewThread}>
+            <a href="#" className="new-thread" onClick={createNewThread}>
               <i className="fa fa-plus" style={{ fontSize: "24px" }}></i>
               <span className="nav-item">New Thread</span>
             </a>
           </li>
           {threads.map(thread => (
             <li key={thread.id}>
-              <a href="/#" className="thread-link" onClick={(e) => showThread(thread, e)}>
+              <a href="#" className="thread-link" onClick={(e) => showThread(thread, e)}>
                 <span className="nav-item">{thread.title}</span>
               </a>
             </li>
@@ -123,8 +120,18 @@ const HomePage: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          {/* Hidden submit button allows Enter key to trigger the form submission */}
+          <button type="submit" style={{ display: 'none' }}>Search</button>
         </form>
       </div>
+
+      {/* Chatbot Response Display Section */}
+      {response && (
+        <div className="response">
+          <h2>Chatbot Response:</h2>
+          <p>{response}</p>
+        </div>
+      )}
     </div>
   );
 };
