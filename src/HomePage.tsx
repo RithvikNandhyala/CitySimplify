@@ -12,6 +12,7 @@ const HomePage: React.FC = () => {
   const [activeThread, setActiveThread] = useState<Thread | null>(null);
   const [threadCount, setThreadCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [response, setResponse] = useState<string | null>(null);
 
   const createNewThread = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();
@@ -38,17 +39,23 @@ const HomePage: React.FC = () => {
     console.log("Searching for:", searchQuery);
 
     try {
-      const response = await fetch('http://localhost:8000/chatbot', {
+      const res = await fetch('https://citysimplify.com/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ query: searchQuery })
       });
-      const data = await response.json();
-      console.log("Backend response:", data);
+
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+    
+      const data = await res.json();
+      setResponse(data.message);
     } catch (error) {
       console.error("Error fetching from FastAPI:", error);
+      setResponse("Error fetching response from chatbot.");
     }
   };
 
@@ -113,8 +120,18 @@ const HomePage: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          {/* Hidden submit button allows Enter key to trigger the form submission */}
+          <button type="submit" style={{ display: 'none' }}>Search</button>
         </form>
       </div>
+
+      {/* Chatbot Response Display Section */}
+      {response && (
+        <div className="response">
+          <h2>Chatbot Response:</h2>
+          <p>{response}</p>
+        </div>
+      )}
     </div>
   );
 };

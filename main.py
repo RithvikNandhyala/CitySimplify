@@ -6,20 +6,7 @@
 # The requirements are below:
 
 # %%
-pip 
-install 
-uvicorn 
-pydantic 
-fastapi 
-python-dotenv 
-langchain_community 
-langchainhub 
-chromadb 
-langchain 
-pypdf 
-langchain_ollama 
-langchain_aws 
-langchain_chroma
+
 
 # %% [markdown]
 # Securely storing API keys
@@ -44,7 +31,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "www.citysimplify.com"
+    "https://citysimplify.com"
 ]
 
 app.add_middleware(
@@ -76,7 +63,7 @@ async def chatbot(request: Request):
 # ## Loading Documents
 
 # %%
-from langchain.document_loaders.pdf import PyPDFDirectoryLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 DATA_PATH = "./data"
 
