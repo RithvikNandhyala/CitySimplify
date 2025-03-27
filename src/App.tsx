@@ -12,6 +12,7 @@ const HomePage: React.FC = () => {
   const [activeThread, setActiveThread] = useState<Thread | null>(null);
   const [threadCount, setThreadCount] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [response, setResponse] = useState<string | null>(null);
 
   // Create a new thread and immediately show it.
   const createNewThread = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -40,20 +41,24 @@ const HomePage: React.FC = () => {
     event.preventDefault();
     console.log("Searching for:", searchQuery);
 
-    // Example API call to your FastAPI backend (adjust URL and payload as needed)
     try {
-      const response = await fetch('https://citysimplify.com/chatbot', {
+      const res = await fetch('https://citysimplify/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ query: searchQuery })
       });
-      const data = await response.json();
-      // Process your backend response as needed.
-      console.log("Backend response:", data);
+
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+    
+      const data = await res.json();
+      setResponse(data.message);
     } catch (error) {
       console.error("Error fetching from FastAPI:", error);
+      setResponse("Error fetching response from chatbot.");
     }
   };
 
