@@ -42,7 +42,7 @@ const HomePage: React.FC = () => {
 
     // Example API call to your FastAPI backend (adjust URL and payload as needed)
     try {
-      const response = await fetch('http://localhost:8000/chatbot', {
+      const response = await fetch('https://citysimplify.com/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
