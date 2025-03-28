@@ -42,7 +42,7 @@ import React, { useState } from 'react';
  
      // Example API call to your FastAPI backend (adjust URL and payload as needed)
      try {
-       const response = await fetch('/chatbot', {
+       const response = await fetch('http://localhost:8000/chatbot', {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
