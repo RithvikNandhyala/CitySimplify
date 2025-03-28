@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
     console.log("Searching for:", searchQuery);
 
     try {
-      const res = await fetch('https://citysimplify/chatbot', {
+      const res = await fetch('https://citysimplify.com/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -78,14 +78,14 @@ const HomePage: React.FC = () => {
       <div className="side-nav">
         <ul id="thread-list">
           <li>
-            <a href="#" className="new-thread" onClick={createNewThread}>
+            <a href="/#" className="new-thread" onClick={createNewThread}>
               <i className="fa fa-plus" style={{ fontSize: "24px" }}></i>
               <span className="nav-item">New Thread</span>
             </a>
           </li>
           {threads.map(thread => (
             <li key={thread.id}>
-              <a href="#" className="thread-link" onClick={(e) => showThread(thread, e)}>
+              <a href="/#" className="thread-link" onClick={(e) => showThread(thread, e)}>
                 <span className="nav-item">{thread.title}</span>
               </a>
             </li>
