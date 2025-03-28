@@ -50,9 +50,24 @@ const AuthLayout = () => {
           ),
           headerShadowVisible: true,
         }}
+        
       />
+      <Stack.Screen
+        name="choose-role"
+        options={{
+          headerBackVisible: false,
+          headerTitle: '',
+          headerShadowVisible: false,
+          headerRight: () => (
+            <Pressable onPress={router.back}>
+              <CloseIcon />
+            </Pressable>
+    ),
+  }}
+/>
     </Stack>
   );
+  
 };
 
 export default AuthLayout;
