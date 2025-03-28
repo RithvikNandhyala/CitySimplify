@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
     console.log("Searching for:", searchQuery);
 
     try {
-      const res = await fetch('https://citysimplify/chatbot', {
+      const res = await fetch('https://citysimplify.com/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
