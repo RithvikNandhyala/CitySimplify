@@ -12,8 +12,8 @@ import React, { useState } from 'react';
    const [activeThread, setActiveThread] = useState<Thread | null>(null);
    const [threadCount, setThreadCount] = useState(0);
    const [searchQuery, setSearchQuery] = useState('');
+   const [response, setResponse] = useState<string | null>(null);
  
-   // Create a new thread and immediately show it.
    const createNewThread = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
      event.preventDefault();
      const newCount = threadCount + 1;
@@ -29,31 +29,33 @@ import React, { useState } from 'react';
      setActiveThread(newThread);
    };
  
-   // Display an existing thread.
    const showThread = (thread: Thread, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
      event.preventDefault();
      setActiveThread(thread);
    };
  
-   // Handle search submission and connect with your FastAPI backend.
    const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
      event.preventDefault();
      console.log("Searching for:", searchQuery);
  
-     // Example API call to your FastAPI backend (adjust URL and payload as needed)
      try {
-       const response = await fetch('http://localhost:8000/chatbot', {
+       const res = await fetch('http://localhost:8000/chatbot', {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
          },
          body: JSON.stringify({ query: searchQuery })
        });
-       const data = await response.json();
-       // Process your backend response as needed.
-       console.log("Backend response:", data);
+ 
+       if (!res.ok) {
+         throw new Error('Network response was not ok');
+       }
+ 
+       const data = await res.json();
+       setResponse(data.message);
      } catch (error) {
        console.error("Error fetching from FastAPI:", error);
+       setResponse("Error fetching response from chatbot.");
      }
    };
  
@@ -76,14 +78,14 @@ import React, { useState } from 'react';
        <div className="side-nav">
          <ul id="thread-list">
            <li>
-             <a href="/#" className="new-thread" onClick={createNewThread}>
+             <a href="#" className="new-thread" onClick={createNewThread}>
                <i className="fa fa-plus" style={{ fontSize: "24px" }}></i>
                <span className="nav-item">New Thread</span>
              </a>
            </li>
            {threads.map(thread => (
              <li key={thread.id}>
-               <a href="/#" className="thread-link" onClick={(e) => showThread(thread, e)}>
+               <a href="#" className="thread-link" onClick={(e) => showThread(thread, e)}>
                  <span className="nav-item">{thread.title}</span>
                </a>
              </li>
@@ -118,10 +120,19 @@ import React, { useState } from 'react';
              value={searchQuery}
              onChange={(e) => setSearchQuery(e.target.value)}
            />
+           {/* Hidden submit button allows Enter key to trigger the form submission */}
+           <button type="submit" style={{ display: 'none' }}>Search</button>
          </form>
        </div>
+ 
+       {/* Chatbot Response Display Section */}
+       {response && (
+         <div className="response">
+           <h2>Chatbot Response:</h2>
+           <p>{response}</p>
+         </div>
+       )}
      </div>
    );
  };
- 
  export default HomePage;
