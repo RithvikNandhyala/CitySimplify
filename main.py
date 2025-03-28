@@ -27,6 +27,7 @@ PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 # %%
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 app = FastAPI()
 
@@ -57,7 +58,9 @@ async def chatbot(request: Request):
     query = rag_query(data.get("query"))
     response = {"message": f"Received query: {query}"}
     return response
-    
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 # %% [markdown]
 # ## Loading Documents
@@ -199,9 +202,3 @@ def rag_query(query_text: str):
     formatted_response = f"Response: {response_text}\nSources: {sources}"
     print(formatted_response)
     return response_text
-
-# %%
-# testing query so far
-rag_query("How should one turn go in Catan?")
-
-
