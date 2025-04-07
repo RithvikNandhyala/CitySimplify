@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Platform,
-  StyleSheet,
+  StyleSheet, //NICEMAN fake comment 
   View,
   Text,
   Pressable,
@@ -42,10 +42,10 @@ const BirthdayScreen = () => {
     <SafeAreaView style={styles.container}>
       <Spacer size={30} />
       <Type variant="caption" color="grey2" style={styles.centerText}>
-        We won’t show your exact birthday.
+        We won't show your exact birthday.
       </Type>
       <Spacer size={30} />
-      <Type variant="displayLarge">What’s your birthday?</Type>
+      <Type variant="displayLarge">What's your birthday?</Type>
       <Spacer size={40} />
 
       <Pressable onPress={showDatePicker} style={styles.dateSelector}>
