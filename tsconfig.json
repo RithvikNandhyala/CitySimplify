@@ -2,11 +2,15 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "module": "NodeNext",                    // ✅ ADD
+    "moduleResolution": "nodenext",          // ✅ ADD
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+      "@/*": ["./*"]
+    },
+    "types": ["react", "react-native"],      // ✅ ADD
+    "resolveJsonModule": true,               // ✅ ADD
+    "esModuleInterop": true,                 // ✅ ADD
+    "skipLibCheck": true                     // ✅ ADD
   },
   "include": [
     "**/*.ts",

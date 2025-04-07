@@ -14,10 +14,13 @@ const ChooseRoleScreen = () => {
   const router = useRouter();
 
   const handleSelect = (role: string) => {
-    // Pass role to next step or store in state
-    router.push('/(auth)/verification-code')
-    // update this later
+    if (role === 'investor') {
+      router.push('/onboarding/investor/Title');
+    } else if (role === 'founder') {
+      router.push('/onboarding/founder/Title');
+    }
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>

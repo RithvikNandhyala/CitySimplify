@@ -32,7 +32,7 @@ const VerificationCodeScreen = () => {
 
   const handleSubmit = () => {
     if (isValid) {
-      router.push('/(auth)/choose-role');
+      router.push('/(auth)/entername');
     }
   };
 
