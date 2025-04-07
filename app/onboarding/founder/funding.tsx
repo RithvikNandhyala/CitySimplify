@@ -21,7 +21,6 @@ const FUNDING_OPTIONS = [
   'Other'
 ];
 
-// ✅ Define the type for entries
 type FundingEntry = {
   stage: string;
   amount: string;

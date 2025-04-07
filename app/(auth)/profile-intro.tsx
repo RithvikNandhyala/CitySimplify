@@ -15,7 +15,7 @@ const ProfileIntroScreen = () => {
   const router = useRouter();
 
   const handleNext = () => {
-    router.push('/(auth)/choose-location'); // Replace with your next screen
+    router.push('/(auth)/birthday'); 
   };
 
   return (
@@ -28,7 +28,7 @@ const ProfileIntroScreen = () => {
       <Spacer size={60} />
 
       <Image
-        source={require('@/assets/match-eyes.png')} // 👈 Replace with your own image!
+        source={require('@/assets/images/favicon.png')} 
         style={styles.image}
         resizeMode="contain"
       />
