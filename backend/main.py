@@ -27,6 +27,7 @@ PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 # %%
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 
 app = FastAPI()
@@ -53,6 +54,8 @@ app.add_middleware(
 # @app.post("/generate")
 # def generate(prompt: str, x_api_key: str = Depends(verify_api_key)):
 #     API_KEY_CREDITS[x_api_key] -= 1
+
+app.mount("/", StaticFiles(directory="../frontend/dist", html=True), name="static")
 
 @app.post("/chatbot")
 async def chatbot(request: Request):
