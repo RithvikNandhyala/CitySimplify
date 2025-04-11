@@ -55,7 +55,8 @@ app.add_middleware(
 # def generate(prompt: str, x_api_key: str = Depends(verify_api_key)):
 #     API_KEY_CREDITS[x_api_key] -= 1
 
-app.mount("/", StaticFiles(directory="../frontend/dist", html=True), name="static")
+frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend/dist"))
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="static")
 
 @app.post("/chatbot")
 async def chatbot(request: Request):
