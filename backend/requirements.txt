@@ -1,5 +1,6 @@
 uvicorn 
-pydantic 
+pydantic
+aiofiles
 fastapi 
 python-dotenv 
 langchain_community 
