@@ -35,7 +35,8 @@ app = FastAPI()
 origins = [
     "https://citysimplify.com",
     "http://localhost:3000",
-    "http://127.0.0.1:3000"
+    "http://127.0.0.1:3000",
+    "https://citysimplify.onrender.com/"
 ]
 
 app.add_middleware(
