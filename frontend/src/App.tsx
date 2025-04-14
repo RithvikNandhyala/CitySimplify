@@ -39,7 +39,8 @@ import React, { useState } from 'react';
      console.log("Searching for:", searchQuery);
  
      try {
-       const res = await fetch('http://localhost:8000/chatbot', {
+       const res = await fetch('https://citysimplify.onrender.com//chatbot', {
+
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
