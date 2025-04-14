@@ -194,7 +194,10 @@ def rag_query(query_text: str):
     model = BedrockLLM(
         credentials_profile_name=None,
         region_name="us-west-2",
-        model_id="meta.llama3-2-3b-instruct-v1:0"
+        model_id="meta.llama3-2-3b-instruct-v1:0",
+        inference_modifier={
+        "inferenceProfileArn": "arn:aws:bedrock:us-east-1:090359340060:inference-profile/us.meta.llama3-2-3b-instruct-v1:0"
+        }
     )
     response_text = model.invoke(prompt)
 
