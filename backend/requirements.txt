@@ -9,4 +9,4 @@ langchain
 pypdf 
 langchain_ollama 
 langchain_aws 
-pinecone-client
+pinecone
