@@ -39,7 +39,7 @@ import React, { useState } from 'react';
      console.log("Searching for:", searchQuery);
  
      try {
-       const res = await fetch('https://citysimplify.onrender.com/chatbot', {
+       const res = await fetch('https://citysimplify.onrender.com/api/chatbot', {
 
          method: 'POST',
          headers: {
