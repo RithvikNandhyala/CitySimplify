@@ -59,11 +59,7 @@ app.add_middleware(
 # def generate(prompt: str, x_api_key: str = Depends(verify_api_key)):
 #     API_KEY_CREDITS[x_api_key] -= 1
 
-app.mount("/static", StaticFiles(directory="dist/static", html=True), name="static")
-
-@app.get("/{full_path:path}")
-async def serve_index(full_path: str):
-    return FileResponse("dist/index.html")
+app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 
 @app.post("/chatbot")
 async def chatbot(request: Request):
