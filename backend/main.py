@@ -59,7 +59,7 @@ app.add_middleware(
 
 app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 
-@app.post("/api/chatbot")
+@app.post("/api/chatbot/")
 async def chatbot(request: Request):
     data = await request.json()
     query = rag_query(data.get("query"))
