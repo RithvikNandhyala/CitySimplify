@@ -59,14 +59,14 @@ app.add_middleware(
 # def generate(prompt: str, x_api_key: str = Depends(verify_api_key)):
 #     API_KEY_CREDITS[x_api_key] -= 1
 
-app.mount("/", StaticFiles(directory="dist", html=True), name="static")
-
 @app.post("/chatbot")
 async def chatbot(request: Request):
     data = await request.json()
     query = rag_query(data.get("query"))
     response = {"message": f"Received query: {query}"}
     return response
+
+app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
