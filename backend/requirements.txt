@@ -9,4 +9,5 @@ langchain
 pypdf 
 langchain_ollama 
 langchain_aws 
+langchain_pinecone
 pinecone
