@@ -170,7 +170,7 @@ else:
 # %%
 from langchain.prompts import ChatPromptTemplate
 from langchain_ollama import OllamaLLM
-from langchain_aws import BedrockLLM
+from langchain_aws import ChatBedrock
 
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
@@ -191,10 +191,11 @@ def rag_query(query_text: str):
     prompt = prompt_template.format(context=context_text, question=query_text)
     # print(prompt) // for testing
 
-    model = BedrockLLM(
+    model = ChatBedrock(
         credentials_profile_name=None,
         region_name="us-west-2",
         model_id="anthropic.claude-3-5-sonnet-20240620-v1:0",
+        model_kwargs={"temperature": 0.2, "max_tokens": 1024}
     )
     response_text = model.invoke(prompt)
 
