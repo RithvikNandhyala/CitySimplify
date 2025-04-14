@@ -193,7 +193,7 @@ def rag_query(query_text: str):
 
     model = ChatBedrock(
         credentials_profile_name=None,
-        region_name="us-west-2",
+        region_name="us-east-1",
         model_id="anthropic.claude-3-5-sonnet-20240620-v1:0",
         model_kwargs={"temperature": 0.2, "max_tokens": 1024}
     )
