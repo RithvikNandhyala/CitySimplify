@@ -29,6 +29,8 @@ PINECONE_INDEX = os.getenv("PINECONE_INDEX")
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
 import uvicorn
 
 app = FastAPI()
