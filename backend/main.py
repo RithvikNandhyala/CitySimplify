@@ -18,7 +18,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY_CREDITS = {os.getenv("API_KEY"): 20}
-BEDROCK_API_KEY
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX = os.getenv("PINECONE_INDEX")
 
@@ -154,12 +153,12 @@ vector_store = PineconeVectorStore(index=index, embedding=get_embedding())
 
 # Adding or updating documents
 chunks_with_ids = calculate_chunk_ids(chunks)
-ids=[chunks_with_ids.metadata["id"] for doc in chunks_with_ids]
 
 # tracking system doesn't work with Pinecone, but used to with ChromaDB
 if len(chunks):
     print(f"Adding new documents: {len(chunks)}")
-    vector_store.add_documents(chunks_with_ids, ids=chunks_with_ids)
+    chunk_ids = [chunk.metadata["id"] for chunk in chunks_with_ids]
+    vector_store.add_documents(chunks_with_ids, ids=chunk_ids)
 else:
     print("No new documents to add")
 
