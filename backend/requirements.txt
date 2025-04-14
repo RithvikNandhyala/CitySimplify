@@ -5,9 +5,8 @@ fastapi
 python-dotenv 
 langchain_community 
 langchainhub 
-chromadb 
 langchain 
 pypdf 
 langchain_ollama 
 langchain_aws 
-langchain_chroma
+pinecone-client
