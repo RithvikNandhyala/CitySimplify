@@ -18,7 +18,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY_CREDITS = {os.getenv("API_KEY"): 20}
+BEDROCK_API_KEY
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_INDEX = os.getenv("PINECONE_INDEX")
 
 # %% [markdown]
 # ## Setting Up API
@@ -141,35 +143,25 @@ def get_embedding():
 # Using ChromaDB, we can now use the embedding function to create a vector database.
 
 # %%
-from langchain_chroma import Chroma
+from pinecone import Pinecone, ServerlessSpec
+from langchain_pinecone import PineconeVectorStore
 
-db = Chroma(
-    persist_directory="chroma",
-    embedding_function=get_embedding()
-)
+pc = Pinecone(api_key=PINECONE_API_KEY)
+
+index = pc.Index(PINECONE_INDEX)
+
+vector_store = PineconeVectorStore(index=index, embedding=get_embedding())
 
 # Adding or updating documents
 chunks_with_ids = calculate_chunk_ids(chunks)
+ids=[chunks_with_ids.metadata["id"] for doc in chunks_with_ids]
 
-existing_items = db.get(include=[])
-existing_ids = set(existing_items["ids"])
-print(f"Number of existing docs in DB:{len(existing_ids)}")
-
-# Only adding chunks that are not in the database
-
-new_chunks = []
-for chunk in chunks_with_ids:
-    if chunk.metadata["id"] not in existing_ids:
-        new_chunks.append(chunk)
-
-if len(new_chunks):
-    print(f"Adding new documents: {len(new_chunks)}")
-    new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
-    db.add_documents(new_chunks, ids=new_chunk_ids)
-    db.persist()
+# tracking system doesn't work with Pinecone, but used to with ChromaDB
+if len(chunks):
+    print(f"Adding new documents: {len(chunks)}")
+    vector_store.add_documents(chunks_with_ids, ids=chunks_with_ids)
 else:
     print("No new documents to add")
-
 
 # %% [markdown]
 # ## Setting up the model and Query
@@ -191,12 +183,8 @@ Answer the question based on the above context: {question}
 """
 
 def rag_query(query_text: str):
-    db = Chroma(
-    persist_directory="chroma",
-    embedding_function=get_embedding()
-    )
-
-    results = db.similarity_search_with_score(query_text, k=5)
+    # results are searched by score in Pinecone database
+    results = vector_store.similarity_search_with_score(query_text, k=5)
     
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
