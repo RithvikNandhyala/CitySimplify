@@ -106,7 +106,7 @@ import React, { useState } from 'react';
  
        <div className="banner">
          <h2>
-           Happy<span>Birthday<span>Amir<span>Khan</span>
+           Happy<span>Birthday<span>Amir<span>Khan!</span>
          </h2>
        </div>
  
