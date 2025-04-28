@@ -34,10 +34,25 @@ nav {
     z-index: 1001;
 }
 
+nav .logo {
+    text-transform: uppercase;
+    color: white;
+    font-family: "Archivo Black", sans-serif;
+    display: flex;
+    align-items: center;
+}
+
 nav .logo h1 {
     text-transform: uppercase;
     color: white;
     font-family: "Archivo Black", sans-serif;
+    margin-left: 10px;
+}
+
+nav .logo .nav-logo {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
 }
 
 nav .logo h1 span {
@@ -68,6 +83,18 @@ nav ul li a:hover {
     text-align: center;
     margin-bottom: 30px;
     margin-top: -50px;
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
 }
 
 .banner h2 {
