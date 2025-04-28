@@ -82,6 +82,7 @@ import React, { useState } from 'react';
      <div className="home">
        <nav>
          <div className="logo">
+           <img src="/city-logo.png" alt="City Simplify Logo" className="nav-logo" />
            <h1>
              City<span>Simplify</span>
            </h1>
@@ -124,9 +125,12 @@ import React, { useState } from 'react';
        </div>
  
        <div className="banner">
-         <h2>
-           City<span>Simplify</span>
-         </h2>
+         <div className="banner-content">
+           <img src="/city-logo.png" alt="City Simplify Logo" className="banner-logo" />
+           <h2>
+             City<span>Simplify</span>
+           </h2>
+         </div>
        </div>
  
        <div className="search-box">
