@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
  import './HomePage.css';
+
+ //plzzzzzz work this time im begg8ing gg ginaouharohu adoufhadoufhadoufhad
  
  interface Thread {
    id: string;
@@ -107,7 +109,7 @@ import React, { useState } from 'react';
  
        <div className="banner">
          <h2>
-           Happy<span>Birthday<span>Amir<span>Khan!</span>
+           City<span>Simplify</span>
          </h2>
        </div>
  
