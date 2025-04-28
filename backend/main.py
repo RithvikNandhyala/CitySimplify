@@ -62,8 +62,14 @@ app.add_middleware(
 @app.post("/chatbot")
 async def chatbot(request: Request):
     data = await request.json()
-    query = rag_query(data.get("query"))
-    response = {"message": f"Received query: {query}"}
+    query = data.get("query")
+    response_text = rag_query(query)
+    
+    # Extract just the content from the response, removing any metadata
+    clean_response = str(response_text)
+    
+    # Return only the clean response without any prefixes
+    response = {"message": clean_response}
     return response
 
 app.mount("/", StaticFiles(directory="dist", html=True), name="static")
@@ -198,8 +204,13 @@ def rag_query(query_text: str):
         model_kwargs={"temperature": 0.2, "max_tokens": 1024}
     )
     response_text = model.invoke(prompt)
-
+    
+    # Extract just the message content, remove any metadata
+    clean_response = str(response_text.content) if hasattr(response_text, 'content') else str(response_text)
+    
+    # Log sources for debugging but don't return them
     sources = [doc.metadata.get("id", None) for doc, _score in results]
-    formatted_response = f"Response: {response_text}\nSources: {sources}"
-    print(formatted_response)
-    return response_text
+    debug_info = f"Sources: {sources}"
+    print(debug_info)
+    
+    return clean_response

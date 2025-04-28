@@ -42,7 +42,6 @@ import React, { useState } from 'react';
  
      try {
        const res = await fetch('https://citysimplify.onrender.com/chatbot', {
-
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
@@ -55,7 +54,24 @@ import React, { useState } from 'react';
        }
  
        const data = await res.json();
-       setResponse(data.message);
+       // Clean the response to remove any unwanted text
+       let cleanResponse = data.message;
+       
+       // Remove any potential metadata or prefixes
+       cleanResponse = cleanResponse.replace(/^.*content=/i, '');
+       cleanResponse = cleanResponse.replace(/^["']/, '').replace(/["']$/, '');
+       cleanResponse = cleanResponse.replace(/additional_kwargs=.*$/s, '');
+       cleanResponse = cleanResponse.replace(/response_metadata=.*$/s, '');
+       cleanResponse = cleanResponse.replace(/id=.*$/s, '');
+       cleanResponse = cleanResponse.replace(/usage_metadata=.*$/s, '');
+       
+       // Remove any multi-line patterns that might span many lines
+       cleanResponse = cleanResponse.replace(/(\n.*?(prompt_tokens|completion_tokens|cache_.*tokens|total_tokens).*?)+/g, '');
+       
+       // Trim any excessive whitespace
+       cleanResponse = cleanResponse.trim();
+       
+       setResponse(cleanResponse);
      } catch (error) {
        console.error("Error fetching from FastAPI:", error);
        setResponse("Error fetching response from chatbot.");
@@ -131,8 +147,10 @@ import React, { useState } from 'react';
        {/* Chatbot Response Display Section */}
        {response && (
          <div className="response">
-           <h2>Chatbot Response:</h2>
-           <p>{response}</p>
+           <h2>Chatbot Response</h2>
+           <div className="response-content">
+             <p>{response}</p>
+           </div>
          </div>
        )}
      </div>
