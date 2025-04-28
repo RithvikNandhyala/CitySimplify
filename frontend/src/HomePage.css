@@ -47,16 +47,13 @@ nav .logo h1 {
     color: white;
     font-family: "Archivo Black", sans-serif;
     margin-left: 10px;
+    color: rgba(17,204,255,0.5);
 }
 
 nav .logo .nav-logo {
     height: 40px;
     width: 40px;
     margin-right: 10px;
-}
-
-nav .logo h1 span {
-    color: rgba(17,204,255,0.5);
 }
 
 nav ul {
@@ -92,16 +89,12 @@ nav ul li a:hover {
 }
 
 .banner h2 {
-    color: white;
+    color: rgba(17,204,255,0.5);
     text-transform: uppercase;
     letter-spacing: 5px;
     border: 3px solid rgba(17,204,255,0.5);
     padding: 10px 25px;
     display: inline-block;
-}
-
-.banner h2 span {
-    color: rgba(17,204,255,0.5);
 }
 
 .search-box {
