@@ -84,7 +84,7 @@ import React, { useState } from 'react';
          <div className="logo">
            <img src="/city-logo.png" alt="CitySimplify Logo" className="nav-logo" />
            <h1>
-             CitySimplify
+             <span className="city-text">City</span><span className="simplify-text">Simplify</span>
            </h1>
          </div>
          <ul>
@@ -127,7 +127,7 @@ import React, { useState } from 'react';
        <div className="banner">
          <div className="banner-content">
            <h2>
-             CitySimplify
+             <span className="city-text">City</span><span className="simplify-text">Simplify</span>
            </h2>
          </div>
        </div>
