@@ -179,13 +179,14 @@ from langchain_ollama import OllamaLLM
 from langchain_aws import ChatBedrock
 
 PROMPT_TEMPLATE = """
-Answer the question based only on the following context:
+Answer the question based on the context below. Keep the answer short and concise. 
+Respond "Unsure about answer" if not sure about the answer:
 
 {context}
 
 ---
-
-Answer the question based on the above context: {question}
+Question: {question}
+Answer:
 """
 
 def rag_query(query_text: str):
