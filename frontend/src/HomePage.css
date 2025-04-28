@@ -91,12 +91,6 @@ nav ul li a:hover {
     align-items: center;
 }
 
-.banner-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 15px;
-}
-
 .banner h2 {
     color: white;
     text-transform: uppercase;

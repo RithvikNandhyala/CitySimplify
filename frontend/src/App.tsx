@@ -126,7 +126,6 @@ import React, { useState } from 'react';
  
        <div className="banner">
          <div className="banner-content">
-           <img src="/city-logo.png" alt="City Simplify Logo" className="banner-logo" />
            <h2>
              City<span>Simplify</span>
            </h2>
