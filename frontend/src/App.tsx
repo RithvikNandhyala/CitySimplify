@@ -82,7 +82,7 @@ import React, { useState } from 'react';
      <div className="home">
        <nav>
          <div className="logo">
-           <img src="/CitySimplfyCutoutVersion .jpg" alt="CitySimplify Logo" className="nav-logo" />
+           <img src="/CitySimplifyCutout_-removebg-preview.png" alt="CitySimplify Logo" className="nav-logo" />
            <h1>
              <span className="city-text">City</span><span className="simplify-text">Simplify</span>
            </h1>
