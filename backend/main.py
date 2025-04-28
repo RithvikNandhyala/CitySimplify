@@ -180,7 +180,7 @@ from langchain_aws import ChatBedrock
 
 PROMPT_TEMPLATE = """
 Answer the question based on the context below. Keep the answer short and concise. 
-Respond "Unsure about answer" if not sure about the answer:
+Do not mention in your answer that you are responding based off of the context:
 
 {context}
 
